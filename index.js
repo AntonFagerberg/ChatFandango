@@ -11,7 +11,7 @@
 
         SESSION_NAME = "humprsid",
         SESSION_SECRET = Math.random().toString(36) + Math.random().toString(36) + Math.random().toString(36) + Math.random().toString(36),
-        PORT = 3000,
+        PORT = 80,
 
         cookieParser = cP(SESSION_SECRET),
         sessionStore = new session.MemoryStore();
