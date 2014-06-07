@@ -1,0 +1,12 @@
+{
+  "name": "Humpr",
+  "version": "0.0.1",
+  "description": "Chat",
+  "dependencies": {
+    "body-parser": "^1.3.0",
+    "cookie-parser": "^1.1.0",
+    "express": "^4.4.1",
+    "express-session": "^1.2.1",
+    "socket.io": "^1.0.4"
+  }
+}
