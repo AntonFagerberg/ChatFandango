@@ -38,7 +38,7 @@
         }
     }).get("/check", function (req, res) {
         if (req.session.username) {
-            res.json({status: "ok"})
+            res.json({status: "ok"});
         } else {
             res.send(403, "Not signed in.");
         }

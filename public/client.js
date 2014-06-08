@@ -33,7 +33,7 @@
             });
         },
         login = function () {
-            $.ajax("/check").done(function (response) {
+            $.ajax("/check").done(function () {
                 chat();
             }).error(function () {
                 $.ajax("/login.template.html").done(function (response) {
