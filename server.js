@@ -29,10 +29,6 @@
         express.static(__dirname + '/public')
     ).get("/", function (req, res) {
         res.sendfile("index.html");
-    }).get("/chat", function (req, res) {
-        res.sendfile("chat.html");
-    }).get("/login", function (req, res) {
-        res.sendfile("login.html");
     }).post('/login', function (req, res) {
         if (req.param("username") && req.param("password") === "humpe") {
             req.session.username = req.param("username");

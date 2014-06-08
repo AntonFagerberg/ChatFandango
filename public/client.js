@@ -5,7 +5,7 @@
     var //socket = io(),
         content = $("#content"),
         chat = function () {
-            $.ajax("/chat").done(function (response) {
+            $.ajax("/chat.template.html").done(function (response) {
                 content.html(response);
 
                 var messages = $('#messages'),
@@ -36,7 +36,7 @@
             $.ajax("/check").done(function (response) {
                 chat();
             }).error(function () {
-                $.ajax("/login").done(function (response) {
+                $.ajax("/login.template.html").done(function (response) {
                     content.html(response);
                     var form = $("form");
 
