@@ -1,4 +1,4 @@
-/*global io, $ */
+/*global io, $, alert */
 (function () {
     "use strict";
 
@@ -9,16 +9,15 @@
                 content.html(response);
 
                 var messages = $('#messages'),
+                    form = $("form"),
+                    input = $(form).find("input"),
                     socket = io();
 
-                    socket.on("msg", function (response) {
-                        messages.append($('<li>').text(response.username + ": " + response.msg));
-                    }).on("connect", function() {
-                        messages.append($('<li>').text("Connected to server."));
-                    });
-
-                var form = $("form"),
-                    input = $(form).find("input");
+                socket.on("msg", function (response) {
+                    messages.append($('<li>').text(response.username + ": " + response.msg));
+                }).on("connect", function () {
+                    messages.append($('<li>').text("Connected to server."));
+                });
 
                 form.submit(function () {
                     var msg = input.val();
@@ -34,27 +33,31 @@
             });
         },
         login = function () {
-            $.ajax("/login").done(function (response) {
-                content.html(response);
-                var form = $("form");
-
-                form.submit(function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "/login",
-                        data: form.serialize()
-                    }).done(function (response) {
-                        if (response.status === "ok") {
-                            chat();
-                        } else {
-                            alert("Invalid login!");
-                        }
-                    });
-
-                    return false;
-                });
+            $.ajax("/check").done(function (response) {
+                chat();
             }).error(function () {
-                alert("Unable to load login page.");
+                $.ajax("/login").done(function (response) {
+                    content.html(response);
+                    var form = $("form");
+
+                    form.submit(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/login",
+                            data: form.serialize()
+                        }).done(function (response) {
+                            if (response.status === "ok") {
+                                chat();
+                            } else {
+                                alert("Invalid login!");
+                            }
+                        });
+
+                        return false;
+                    });
+                }).error(function () {
+                    alert("Unable to load login page.");
+                });
             });
         };
 
