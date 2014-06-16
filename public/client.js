@@ -3,7 +3,7 @@
     "use strict";
 
     var //socket = io(),
-        content = $("#content"),
+    content = $("#content"),
         chat = function () {
             $.ajax("/chat.template.html").done(function (response) {
                 content.html(response);

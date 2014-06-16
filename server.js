@@ -32,13 +32,19 @@
     }).post('/login', function (req, res) {
         if (req.param("username") && req.param("password") === "humpe") {
             req.session.username = req.param("username");
-            res.json({status: "ok"});
+            res.json({
+                status: "ok"
+            });
         } else {
-            res.json({status: "not ok"});
+            res.json({
+                status: "not ok"
+            });
         }
     }).get("/check", function (req, res) {
         if (req.session.username) {
-            res.json({status: "ok"});
+            res.json({
+                status: "ok"
+            });
         } else {
             res.send(403, "Not signed in.");
         }
@@ -59,8 +65,8 @@
             }
 
             var sessionCookie = (data.secureCookies && data.secureCookies[SESSION_NAME]) ||
-                                (data.signedCookies && data.signedCookies[SESSION_NAME]) ||
-                                (data.cookies && data.cookies[SESSION_NAME]);
+                (data.signedCookies && data.signedCookies[SESSION_NAME]) ||
+                (data.cookies && data.cookies[SESSION_NAME]);
 
             sessionStore.load(sessionCookie, function (error, session) {
                 if (error || !session || !session.username) {
@@ -76,14 +82,23 @@
     }).on("connection", function (socket) {
         var username = socket.client.request.username;
 
-        io.emit("msg", { msg: username + " has connected.", username: "System" });
+        io.emit("msg", {
+            msg: username + " has connected.",
+            username: "System"
+        });
 
         socket.on("disconnect", function () {
-            io.emit("msg", { msg: username + " has disconnected.", username: "System" });
+            io.emit("msg", {
+                msg: username + " has disconnected.",
+                username: "System"
+            });
         });
 
         socket.on("msg", function (msg) {
-            io.emit("msg", { msg: msg, username: username });
+            io.emit("msg", {
+                msg: msg,
+                username: username
+            });
         });
     });
 
